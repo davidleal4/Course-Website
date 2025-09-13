@@ -5,26 +5,21 @@ import { Level } from "@prisma/client"; // Import the Level enum
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const category = searchParams.get("category") ?? "placeholder-category";
+    const category = searchParams.get("category") ?? undefined;
     const search = searchParams.get("search") ?? "";
-    const level = searchParams.get("level") ?? "placeholder-level";
+    const level = searchParams.get("level") ?? undefined;
 
-
-    // Use Prisma's CourseWhereInput type for better type safety
+    // Build the where clause with correct types
     const where: any = {
       published: true,
     };
 
-
-    if (category && category !== "placeholder-category") {
+    if (category) {
       where.category = category;
     }
 
-    if (level && level !== "placeholder-level") {
-      // Ensure 'level' is a valid Level enum value
-      if (Object.values(Level).includes(level as Level)) {
-        where.level = { equals: level as Level };
-      }
+    if (level && Object.values(Level).includes(level as Level)) {
+      where.level = { equals: level as Level };
     }
 
     if (search) {
@@ -35,29 +30,28 @@ export async function GET(request: NextRequest) {
       ];
     }
 
-
     const courses = await prisma.course.findMany({
       where,
       include: {
         lessons: {
           select: {
             id: true,
-            duration: true, // Placeholder: ensure 'duration' exists in your schema
+            duration: true,
           },
         },
         _count: {
           select: {
             lessons: true,
-            purchases: true, // Placeholder: ensure 'purchases' exists in your schema
+            purchases: true,
           },
         },
       },
       orderBy: {
-        createdAt: "desc", // Placeholder: ensure 'createdAt' exists in your schema
+        createdAt: "desc",
       },
     });
 
-    // Add placeholder data if no courses found
+    // Return placeholder if no courses found
     if (!courses || courses.length === 0) {
       return NextResponse.json([
         {
