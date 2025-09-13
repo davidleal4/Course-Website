@@ -166,7 +166,7 @@ export default function CoursePage() {
                 <div className="h-64 bg-gray-200 rounded-xl mb-6"></div>
                 <div className="h-6 bg-gray-200 rounded w-1/3 mb-4"></div>
                 <div className="space-y-4">
-                    {/* [...Array(5)].map((_, i) => (
+                  {[...Array(5)].map((_, i) => (
                     <div key={i} className="h-16 bg-gray-200 rounded"></div>
                   ))}
                 </div>
@@ -198,7 +198,7 @@ export default function CoursePage() {
     );
   }
 
-  const totalDuration = lessons.reduce((acc, lesson) => acc + lesson.duration, 0);
+  const totalDuration = lessons && lessons.length > 0 ? lessons.reduce((acc, lesson) => acc + lesson.duration, 0) : 0;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -214,38 +214,40 @@ export default function CoursePage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Course Info */}
             <div className="lg:col-span-2">
-              <div className="mb-4">
-                <span className="inline-block px-3 py-1 text-sm font-medium text-blue-700 bg-blue-100 rounded-full">
-                  {course.category}
-                </span>
+              <div className="space-y-4">
+                {lessons.map((lesson, index) => (
+                  <div key={lesson.id}>
+                    <div className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                            <span className="text-sm font-medium text-blue-600">{index + 1}</span>
+                          </div>
+                          <div>
+                            <h3 className="font-medium text-gray-900">{lesson.title}</h3>
+                            <p className="text-sm text-gray-600">{lesson.description}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2 text-sm text-gray-500">
+                          <Clock className="h-4 w-4" />
+                          <span>{formatDuration(lesson.duration)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                {course.title}
-              </h1>
-              
-              <p className="text-xl text-gray-600 mb-6">
-                {course.description}
-              </p>
-              
-              <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600 mb-8">
-                <div className="flex items-center space-x-2">
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <span className="font-medium">4.8</span>
-                  <span>(2,341 reviews)</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Users className="h-5 w-5" />
-                  <span>{course._count.purchases} students enrolled</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Clock className="h-5 w-5" />
-                  <span>{formatDuration(totalDuration)} total content</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <BookOpen className="h-5 w-5" />
-                  <span>{course._count.lessons} lessons</span>
-                </div>
+              <div className="flex items-center space-x-2">
+                <Users className="h-5 w-5" />
+                <span>{course?._count?.purchases ?? 0} students enrolled</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Clock className="h-5 w-5" />
+                <span>{formatDuration(totalDuration)} total content</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <BookOpen className="h-5 w-5" />
+                <span>{course?._count?.lessons ?? 0} lessons</span>
               </div>
 
               <div className="bg-gray-100 rounded-xl p-6 mb-8">
@@ -282,7 +284,7 @@ export default function CoursePage() {
                 
                 <div className="text-center mb-6">
                   <div className="text-3xl font-bold text-gray-900 mb-2">
-                    {formatPrice(course.price)}
+                    {formatPrice(course?.price ?? 0)}
                   </div>
                   <div className="text-sm text-gray-500">
                     Full lifetime access
@@ -361,11 +363,11 @@ export default function CoursePage() {
               <div className="flex items-start space-x-4">
                 <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
                   <span className="text-xl font-bold text-gray-600">
-                    {course.instructor.split(' ').map(n => n[0]).join('')}
+                    {(course?.instructor ?? '').split(' ').map(n => n[0]).join('')}
                   </span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900">{course.instructor}</h3>
+                  <h3 className="text-xl font-semibold text-gray-900">{course?.instructor ?? ''}</h3>
                   <p className="text-gray-600 mb-2">Senior React Developer</p>
                   <p className="text-sm text-gray-600">
                     John has over 8 years of experience in web development and has taught over 50,000 students online. 
