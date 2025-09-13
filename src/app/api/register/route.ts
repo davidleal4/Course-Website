@@ -37,13 +37,13 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Remove password from response
-  const { password, ...userWithoutPassword } = user;
+  // Remove password from response
+  const { password: _userPassword, ...userWithoutPassword } = user;
 
-    return NextResponse.json(
-      { message: "User created successfully", user: userWithoutPassword },
-      { status: 201 }
-    );
+  return NextResponse.json(
+    { message: "User created successfully", user: userWithoutPassword },
+    { status: 201 }
+  );
   } catch (error) {
     console.error("Error creating user:", error);
     return NextResponse.json(
