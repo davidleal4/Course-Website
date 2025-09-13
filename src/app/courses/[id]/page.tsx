@@ -186,7 +186,7 @@ export default function CoursePage() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Course Not Found</h1>
-          <p className="text-gray-600 mb-8">The course you're looking for doesn't exist.</p>
+          <p className="text-gray-600 mb-8">The course you&apos;re looking for doesn&apos;t exist.</p>
           <Link
             href="/courses"
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"

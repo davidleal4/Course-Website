@@ -314,11 +314,11 @@ export default function Dashboard() {
               <div className="space-y-3 text-sm">
                 <div className="flex items-center space-x-3">
                   <Calendar className="h-4 w-4 text-blue-600" />
-                  <span className="text-gray-600">Completed lesson "React Hooks"</span>
+                  <span className="text-gray-600">Completed lesson &quot;React Hooks&quot;</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Calendar className="h-4 w-4 text-green-600" />
-                  <span className="text-gray-600">Started "Python for Data Science"</span>
+                  <span className="text-gray-600">Started &quot;Python for Data Science&quot;</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Calendar className="h-4 w-4 text-purple-600" />
