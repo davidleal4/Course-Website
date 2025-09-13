@@ -7,7 +7,7 @@ import Link from "next/link";
 import { 
   Clock, 
   Users, 
-  Star, 
+  // Star, 
   Play, 
   CheckCircle, 
   // ShoppingCart,

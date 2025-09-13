@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const level = searchParams.get("level") ?? undefined;
 
     // Build the where clause with correct types
-  let where: any = {
+  const where: Record<string, unknown> = {
       published: true,
     };
 
