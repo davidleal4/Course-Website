@@ -107,11 +107,15 @@ async function main() {
 
   for (const courseData of courses) {
     const { lessons, ...courseInfo } = courseData;
-    
+
+    // Convert level string to Prisma enum
     const course = await prisma.course.upsert({
       where: { id: courseData.id },
       update: {},
-      create: courseInfo,
+      create: {
+        ...courseInfo,
+        level: courseInfo.level as any, // Replace 'any' with 'Level' if you import it from Prisma
+      },
     });
 
     // Create lessons for each course
