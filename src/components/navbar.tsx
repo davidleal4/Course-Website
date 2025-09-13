@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { Menu, X, User, LogOut, ShoppingCart, BookOpen } from "lucide-react";
+import { Menu, X, User, LogOut, BookOpen } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

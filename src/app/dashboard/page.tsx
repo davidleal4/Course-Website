@@ -12,8 +12,7 @@ import {
   Play,
   Calendar,
   User,
-  Settings,
-  LogOut
+  Settings
 } from "lucide-react";
 import { formatDuration } from "@/lib/utils";
 
@@ -241,7 +240,7 @@ export default function Dashboard() {
               ) : (
                 <div className="text-center py-8">
                   <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600 mb-4">You haven't enrolled in any courses yet.</p>
+                  <p className="text-gray-600 mb-4">You haven&apos;t enrolled in any courses yet.</p>
                   <Link
                     href="/courses"
                     className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"

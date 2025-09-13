@@ -34,8 +34,12 @@ export default function SignIn() {
           router.push("/dashboard");
         }
       }
-    } catch (error) {
+    } catch {
       setError("An error occurred. Please try again.");
+    }
+
+    // Show error in UI if present
+    // ...existing code...
     } finally {
       setLoading(false);
     }
